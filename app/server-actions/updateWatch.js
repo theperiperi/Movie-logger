@@ -3,7 +3,8 @@ import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
-export async function addWatch(formData){
+export async function updateWatch(formData){
+    const id = formData.get('id');
     const rating = formData.get('rating');
     const title = formData.get('title');
     const review = formData.get('review');
@@ -19,15 +20,14 @@ export async function addWatch(formData){
     }
 
     const {data,error} = await supabase
-        .from('watches').
-        insert([
+        .from('watches')
+        .update([
             { 
                 rating,
                 title,
                 review: review,
-                user_id: user.id
             }
-        ]);
+        ]).match({id, user_id: user.id});
 
     if(error){
         console.error(error);
@@ -35,5 +35,5 @@ export async function addWatch(formData){
     }
 
     revalidatePath('/watch-list');
-    return {message: 'Watch added successfully' }
+    return {message: 'Watch successfully updated' }
 }

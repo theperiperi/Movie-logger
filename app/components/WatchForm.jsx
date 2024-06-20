@@ -1,6 +1,8 @@
+import { addWatch } from "../server-actions/addWatch";
+
 export default function WatchForm() {
     return (
-        <form action="addWatch" className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
+        <form action={addWatch} className="bg-gray-800 p-6 rounded-lg shadow-lg space-y-4">
             <div className="space-y-2">
                 <label htmlFor="brand" className="block text-pink-400 font-semibold">
                     Brand

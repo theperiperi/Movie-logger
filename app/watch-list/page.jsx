@@ -1,5 +1,6 @@
 import WatchForm from '../components/WatchForm.jsx';
 import EditWatch from '../components/EditWatch.jsx';
+import { deleteWatch } from '../server-actions/deleteWatch.js';
 import {cookies} from 'next/headers';
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
 
@@ -44,7 +45,7 @@ export default async function WatchList() {
                                 {watch.brand} - {watch.name}
                             </h2>
                             <div className="flex space-x-4">
-                                <form action="deleteWatch" className="flex-shrink-0">
+                                <form action={deleteWatch} className="flex-shrink-0">
                                     <input type="hidden" name="id" value={watch.id} />
                                     <button
                                         type="submit"
